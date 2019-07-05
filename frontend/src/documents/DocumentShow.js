@@ -27,10 +27,11 @@ const CreateRelatedComment = ({ record }) => (
     </Button>
 );
 
-const DocumentShow = props => (
+const DocumentShow = ({ permissions, ...props}) => (
     <ShowController title={<DocumentTitle />} {...props}>
-        {controllerProps => (
-            <ShowView {...props} {...controllerProps}>
+        {controllerProps => {
+            console.log(permissions);
+            return <ShowView {...props} {...controllerProps}>
                 <SimpleShowLayout>
                     <TextField source="name" />
                     <ReferenceField source="category_id" reference="categories" linkType={false}>
@@ -54,7 +55,7 @@ const DocumentShow = props => (
                     { props.permissions === 'manager' && <CreateRelatedComment /> }
                 </SimpleShowLayout>
             </ShowView>
-        )}
+        }}
     </ShowController>
 );
 

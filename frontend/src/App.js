@@ -47,6 +47,8 @@ import TextEntryEdit from './textentries/TextEntryEdit';
 import TextEntryList from './textentries/TextEntryList';
 import TextEntryShow from './textentries/TextEntryShow';
 
+import MasterDocumentIcon from './master-documents/MasterDocumentList';
+import MasterDocumentList from './master-documents/MasterDocumentList';
 
 class App extends Component {
 
@@ -71,6 +73,9 @@ class App extends Component {
                         icon={UserIcon}
                         edit={permissions === 'manager' ? UserEdit : null}
                         create={permissions === 'manager' ? UserCreate: null}/>,
+                    <Resource name="master-documents"
+                        list={MasterDocumentList}
+                        icon={MasterDocumentIcon} />,
                     <Resource name="categories"
                         list={CategoryList}
                         show={CategoryShow}

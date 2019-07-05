@@ -16,6 +16,7 @@ import users from '../users';
 import documents from '../documents';
 import textentries from '../textentries';
 import forms from '../forms';
+import masterDocuments from '../master-documents';
 
 class Menu extends Component {
     state = {
@@ -37,6 +38,14 @@ class Menu extends Component {
             <div>
                 {' '}
                 <DashboardMenuItem onClick={onMenuClick} />
+                <MenuItemLink
+                    to={`/master-documents`}
+                    primaryText={translate(`resources.masterDocuments.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<masterDocuments.icon />}
+                    onClick={onMenuClick}
+                />
                 <MenuItemLink
                     to={`/categories`}
                     primaryText={translate(`resources.categories.name`, {

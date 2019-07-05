@@ -12,6 +12,10 @@ import {
 } from 'react-admin'; // eslint-disable-line import/no-unresolved
 import CategoryTitle from './CategoryTitle';
 
+const redirect = (id, basePath, record) => ({
+    pathname: (record.article_type === 'textentry' ? `/textentries/${id}/show` : record.article_type === 'document' ? `/documents/${id}/show` : `/forms/${id}/show`)
+})
+
 const CategoryShow = props => (
     <ShowController title={<CategoryTitle />} {...props}>
         {controllerProps => (
@@ -25,7 +29,7 @@ const CategoryShow = props => (
                             sort={{ field: 'article_type', order: 'ASC' }}
                             label="category.form.articles"
                         >
-                            <Datagrid>
+                            <Datagrid rowClick={redirect}>
                                 <TextField source="name" />
                                 <TextField source="article_type" />
                                 <ReferenceField reference="users" source="created_by" linkType={false}>

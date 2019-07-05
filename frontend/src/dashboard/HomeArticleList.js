@@ -15,13 +15,13 @@ import {
 } from 'react-admin'; // eslint-disable-line import/no-unresolved
 
 const redirect = (id, basePath, record) => ({
-    pathname: (record.article_type === 'textentry' ? `/textentries/${id}/show` : `/textentries/${id}/show`)
+    pathname: (record.article_type === 'textentry' ? `/textentries/${id}/show` : `/documents/${id}/show`)
 })
 
 export class HomeArticleList extends Component {
     render() {
         return  <Card>
-                    <CardHeader title="Articles" />
+                    <CardHeader title="Top Articles" />
                     <CardContent>
                         <Paper>
                             <List
@@ -33,7 +33,9 @@ export class HomeArticleList extends Component {
                                 hasEdit={false}
                                 hasShow={false}
                                 resource="articles"
-                                bulkActionButtons={<Fragment></Fragment>}
+                                bulkActionButtons={false}
+                                exporter={false}
+                                pagination={<Fragment></Fragment>}
                                 sort={{ field: 'name', order: 'ASC' }}
                                 filter={{is_homepage: true, is_active: true}}
                             >

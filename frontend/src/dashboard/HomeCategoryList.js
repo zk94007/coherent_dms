@@ -18,7 +18,7 @@ import {
 export class HomeCategoryList extends Component {
     render() {
         return  <Card>
-                    <CardHeader title="Categories" />
+                    <CardHeader title="Browse Categories" />
                     <CardContent>
                         <Paper>
                             <List
@@ -30,7 +30,9 @@ export class HomeCategoryList extends Component {
                                 hasEdit={false}
                                 hasShow={false}
                                 resource="categories"
-                                bulkActionButtons={<Fragment></Fragment>}
+                                bulkActionButtons={false}
+                                exporter={false}
+                                pagination={<Fragment></Fragment>}
                                 sort={{ field: 'name', order: 'ASC' }}
                             >
                                 <Responsive

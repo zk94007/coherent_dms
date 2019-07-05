@@ -24,7 +24,7 @@ const sometimesFailsDataProvider = (type, resource, params) =>
         return resolve(uploadCapableDataProvider(type, resource, params));
     });
 const delayedDataProvider = (type, resource, params) => {
-    if (resource === 'documents' || resource === 'textentries' || resource === 'forms') {
+    if (resource === 'documents' || resource === 'textentries' || resource === 'forms' || resource === 'master-documents') {
         resource = 'articles';
     }
     return new Promise(resolve =>

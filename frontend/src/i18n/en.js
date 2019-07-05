@@ -45,6 +45,9 @@ export const messages = {
         },
     },
     resources: {
+        masterDocuments: {
+            name: 'Master Document |||| Master Documents',
+        },
         categories: {
             name: 'Category |||| Categories',
         },

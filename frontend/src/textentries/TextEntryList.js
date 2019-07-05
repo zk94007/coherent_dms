@@ -50,12 +50,15 @@ const textEntryRowStyle = (record, index) => ({
     backgroundColor: record.is_active ? 'lightblue' : 'lightgrey',
 });
 
-const TextEntryList = withStyles(styles)(({ permissions, classes, ...props }) => (
-    <List
+const TextEntryList = withStyles(styles)(({ permissions, classes, ...props }) => {
+    if (!permissions)
+        return <Fragment></Fragment>;
+
+    return <List
         {...props}
         bulkActionButtons={<TextEntryListBulkActions />}
         filters={<TextEntryFilter />}
-        filter={{article_type: 'textentry'}}
+        filter={(permissions === 'manager' ? {article_type: 'textentry'} : {article_type: 'textentry', is_active: true})}
         sort={{ field: 'name', order: 'ASC' }}
     >
         <Responsive
@@ -74,8 +77,10 @@ const TextEntryList = withStyles(styles)(({ permissions, classes, ...props }) =>
                     <ReferenceField source="category_id" reference="categories" linkType={false}>
                         <TextField source="name" />
                     </ReferenceField>
-                    <BooleanField source="is_active" />
-                    <BooleanField source="is_homepage" />
+                    {permissions === 'manager' &&
+                    <BooleanField source="is_active" />}
+                    {permissions === 'manager' &&
+                    <BooleanField source="is_homepage" />}
                     <DateField source="updated_at" />
                     <ReferenceField source="created_by" reference="users" linkType={false}>
                         <TextField source="name" />
@@ -89,6 +94,6 @@ const TextEntryList = withStyles(styles)(({ permissions, classes, ...props }) =>
             }
         />
     </List>
-));
+});
 
 export default TextEntryList;

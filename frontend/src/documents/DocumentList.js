@@ -50,12 +50,15 @@ const documentRowStyle = (record, index) => ({
     backgroundColor: record.is_active ? 'lightblue' : 'lightgrey',
 });
 
-const DocumentList = withStyles(styles)(({ permissions, classes, ...props }) => (
-    <List
+const DocumentList = withStyles(styles)(({ permissions, classes, ...props }) => {
+    if (!permissions)
+        return <Fragment></Fragment>;
+
+    return <List
         {...props}
         bulkActionButtons={<DocumentListBulkActions />}
         filters={<DocumentFilter />}
-        filter={{article_type: 'document'}}
+        filter={permissions === 'manager' ? {article_type: 'document'} : {article_type: 'document', is_active: true}}
         sort={{ field: 'name', order: 'ASC' }}
     >
         <Responsive
@@ -94,6 +97,6 @@ const DocumentList = withStyles(styles)(({ permissions, classes, ...props }) => 
             }
         />
     </List>
-));
+});
 
 export default DocumentList;

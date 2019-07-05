@@ -20,6 +20,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 
 from api.pagination import CustomPagination
+from api.filters import ArticleTypesInFilterBackend
 
 # Create your views here.
 class CustomUserViewSet(viewsets.ModelViewSet):
@@ -89,11 +90,11 @@ class ArticleViewSet(viewsets.ModelViewSet):
         permissions.AllowAny,
         permissions.IsAuthenticated,
     )
-    filter_backends = (DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter, )
-    filterset_fields = ('name', 'category_id', 'article_type', 'is_active', 'is_homepage', )
+    filter_backends = (DjangoFilterBackend, ArticleTypesInFilterBackend, filters.OrderingFilter, filters.SearchFilter, )
+    filterset_fields = ('name', 'category_id', 'is_active', 'is_homepage', )
     search_fields = ('name', )
     pagination_class = CustomPagination
-
+    
     def create(self, request):
         data = request.data
         data['created_by'] = request.user.id
